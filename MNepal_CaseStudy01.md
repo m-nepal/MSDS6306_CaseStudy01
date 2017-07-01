@@ -432,7 +432,7 @@ ggplot(median_ABV_IBU,aes(median_ABV_IBU$State, y=median_ABV_IBU$Median_IBU))+
 #### What we see from the bar chart?
 Comparing two bar graph, if the ABV content in the beer is increased the IBU also seems to be increasing. Most of the state has bitter beer with  ABV atleast 0.05. To summarise the bar graph, Higher the alcohalic content more the bitterness in the beer.
 
-#### Did you see the MAX alcohalic beer and MOST bitter beer?
+#### Which state has the MAX alcohalic beer and MOST bitter beer?
 
 ```r
 max_ABV <- max(cleanedData$ABV,na.rm = TRUE)
@@ -495,4 +495,8 @@ ggplot(beers, aes(x = ABV, y = IBU)) + geom_point(na.rm=TRUE)+geom_smooth(method
 
 ![](MNepal_CaseStudy01_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
 
-Athough there are outliers, there is positive correlation beteen two variables. More ABV content in beer leads more bitterness beer.
+Athough there are outliers, there is positive correlation between two variables. More ABV content in beer leads more bitterness beer.
+
+#### Conclusion
+Analysing the provided data, Colorado has the most alcohalic beer and Orlando has most bitter beer. There were some NA's in the data sets.Orlando enjoys most bitter beer and  Colorado enjoys most alcohalic beer.And the scatter plot shows the positive correlation between ABV and IBU contents of beer.
+The purpose of this project is to provide a hands on knowledge on some of the techniques like Data exploration, data wrangling, graphics using R. And I would say, the project has accomplished it's  purpose of it.
