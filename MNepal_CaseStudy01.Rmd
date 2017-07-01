@@ -180,4 +180,5 @@ Let's plot the scatter plot to do so.
 ggplot(beers, aes(x = ABV, y = IBU)) + geom_point(na.rm=TRUE)+geom_smooth(method=lm,se=FALSE, na.rm=TRUE)
 
 ```
+
 Athough there are outliers, there is positive correlation beteen two variables. More ABV content in beer leads more bitterness beer.

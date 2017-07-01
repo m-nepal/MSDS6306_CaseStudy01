@@ -494,4 +494,5 @@ ggplot(beers, aes(x = ABV, y = IBU)) + geom_point(na.rm=TRUE)+geom_smooth(method
 ```
 
 ![](MNepal_CaseStudy01_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+
 Athough there are outliers, there is positive correlation beteen two variables. More ABV content in beer leads more bitterness beer.
