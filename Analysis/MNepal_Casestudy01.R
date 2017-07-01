@@ -4,6 +4,7 @@ ls()
 # set the working dir and imprt the two csv files
 
 setwd("C:/Users/mohan/Desktop/MSDS6306_CaseStudy01/Data")
+# here we are replacing blank cell as NA
 beers <- read.csv("Beers.csv", sep = ",", header = TRUE,na.strings = c("","NA"))
 breweries <- read.csv("Breweries.csv", header = TRUE, sep=",",na.strings =c("","NA"))
 # check the content of beers and breweries
@@ -21,7 +22,9 @@ head(brewery_ps_way1)
 head(brewery_ps_way2)
 #in this method Group.1 column is State and x represnts the number of brewery
 # first 6 rows,  we can verify both of the method are giving the same result.
-# Using dplyer package rename method to give meaning full name
+# Using dplyr package rename method to give meaning full name
+install.packages("dplyr")
+library(dplyr)
 breweriesPerState <- rename(brewery_ps_way1,State = Var1,Breweries_Count = Freq)
 head(breweriesPerState)
 # We can apply the same rename method in way 2 also.
@@ -31,8 +34,6 @@ dim(merged_data)
 # Here Beer name is listed as Name.x and Brewery name as Name.y 
 # Use rename method to give some meaning full name on merged data
 # use rename method from "dplyr" package
-install.packages("dplyr")
-library(dplyr)
 merged_new <- rename(merged_data, Beer = Name.x , Brewery = Name.y)
 head(merged_new)
 tail(merged_new)
@@ -57,15 +58,31 @@ head(cleanedData)
 tail(cleanedData)
 # For computing median for alcohal content and IBU for each state used two methods for comparing the result
 #install.packages("dplyr")
-library(plyr)
+library(dplyr)
+library(ggplot2)
 
+#finding medain ABV and IBU per state
 median_per_state_way1 <- ddply(cleanedData, .(State), summarize,  ABV=median(ABV), IBU=median(IBU))
 median_per_state_way2 <- cleanedData %>% group_by(State) %>% summarise_at(vars(ABV, IBU), median)
+head(median_per_state_way1)
+head(median_per_state_way2)
+# the above method doesn't seem to provide correct result, so I used another method here just to verify
 median_ABV_IBU <- aggregate(cbind(cleanedData$ABV,cleanedData$IBU)~State, FUN = median,cleanedData,na.rm = TRUE)
-colnames(median_ABV_IBU) <- c("State","median_ABV","Median_IBU")
+head(median_ABV_IBU)
+#here ABV is named as V1 and IBU as V2, so using colnames we can rename to give meaningful name
+colnames(median_ABV_IBU) <- c("State","Median_ABV","Median_IBU")
+head(median_ABV_IBU)
 # bar chart???
-ggplot(median_ABV_IBU,aes(median_ABV_IBU$State, y=median_ABV_IBU$median_ABV))+geom_bar(stat="identity")
-ggplot(median_ABV_IBU,aes(median_ABV_IBU$State, y=median_ABV_IBU$Median_IBU))+geom_bar(stat="identity")
+ggplot(median_ABV_IBU,aes(median_ABV_IBU$State, y=median_ABV_IBU$Median_ABV))+
+    geom_bar(stat="identity")+labs(x="State",y="ABV") + ggtitle("IBU median per State")
+ggplot(median_ABV_IBU,aes(median_ABV_IBU$State, y=median_ABV_IBU$Median_IBU))+
+  geom_bar(stat="identity")+labs(x="State",y="IBU")+ggtitle("ABV median per State")
+
+#combined
+library(reshape2)
+bpdata <- melt(median_ABV_IBU$State)
+ggplot(bpdata,aes(Block,value,fill=variable))+
+  geom_bar(stat="identity",position="dodge")
 
 # Which state MAX alcohalic beer?
 
