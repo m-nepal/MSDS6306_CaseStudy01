@@ -18,7 +18,7 @@ The case study is based on **Beers** and **Brewery** dataset provided in <a href
 
 ##### Beers
 * Name: Name of the beer.
-* Beer_ID: Unique identier of the beer.
+* Beer_ID: Unique identier of the beer.
 * ABV: Alcohol by volume of the beer.
 * IBU: International Bitterness Units of the beer.
 * Brewery_ID: Brewery id associated with the beer.
@@ -26,7 +26,7 @@ The case study is based on **Beers** and **Brewery** dataset provided in <a href
 * Ounces: Ounces of beer.
 
 ##### Breweries
-* Brew_ID: Unique identier of the brewery.
+* Brew_ID: Unique identier of the brewery.
 * Name: Name of the brewery.
 * City: City where the brewery is located.
 * State: State where the brewery is located.
